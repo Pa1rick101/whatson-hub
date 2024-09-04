@@ -12,11 +12,17 @@ export default function Home() {
         borderRadius={8}
         borderWidth={1}
       >
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-full flex flex-col items-center justify-center space-y-8">
           <HyperText 
             text="Whatson Hub" 
             className="text-5xl font-bold text-gray-900"
           />
+          <div className="max-w-md text-center">
+            <p className="text-lg italic text-gray-600 mb-2">
+              "The newest technical papers and the oldest books are the best sources of arbitrage."
+            </p>
+            <p className="text-sm text-gray-500">- Balaji Srinivasan</p>
+          </div>
         </div>
       </ShineBorder>
     </main>
