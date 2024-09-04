@@ -1,10 +1,11 @@
 import GridPattern from "@/components/magicui/animated-grid-pattern";
 import HyperText from "@/components/magicui/hyper-text";
 import ShineBorder from "@/components/magicui/shine-border";
+import { Users, BookOpen, FolderTree } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white text-gray-900">
+    <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white text-gray-900">
       <GridPattern className="absolute inset-0 opacity-40 text-gray-300" />
       <ShineBorder
         className="relative flex h-[500px] w-full max-w-3xl flex-col items-center justify-center overflow-hidden rounded-lg border bg-white md:shadow-xl p-0"
@@ -25,6 +26,27 @@ export default function Home() {
           </div>
         </div>
       </ShineBorder>
+      
+      <div className="mt-8 w-full max-w-3xl grid grid-cols-3 gap-4">
+        <div className="bg-white text-gray-900 p-4 rounded-lg shadow-md border border-gray-300 relative z-10">
+          <Users className="absolute top-2 right-2 w-5 h-5 text-gray-400" />
+          <h3 className="text-sm font-semibold mb-2">Users</h3>
+          <p className="text-3xl font-bold">450</p>
+          <p className="text-green-600 text-sm">+20% last month</p>
+        </div>
+        <div className="bg-white text-gray-900 p-4 rounded-lg shadow-md border border-gray-300 relative z-10">
+          <BookOpen className="absolute top-2 right-2 w-5 h-5 text-gray-400" />
+          <h3 className="text-sm font-semibold mb-2">Papers Read</h3>
+          <p className="text-3xl font-bold">3,201</p>
+          <p className="text-green-600 text-sm">+180% from last month</p>
+        </div>
+        <div className="bg-white text-gray-900 p-4 rounded-lg shadow-md border border-gray-300 relative z-10">
+          <FolderTree className="absolute top-2 right-2 w-5 h-5 text-gray-400" />
+          <h3 className="text-sm font-semibold mb-2">Categories</h3>
+          <p className="text-3xl font-bold">7</p>
+          <p className="text-blue-600 text-sm">Expanding regularly</p>
+        </div>
+      </div>
     </main>
   );
 }
