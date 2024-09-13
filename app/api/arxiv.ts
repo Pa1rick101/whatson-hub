@@ -2,6 +2,17 @@ import axios from 'axios';
 import { parseString } from 'xml2js';
 import { promisify } from 'util';
 
+interface ArxivResponse {
+  feed: {
+    entry?: Array<{
+      id: string[];
+      title: string[];
+      author: Array<{ name: string[] }>;
+      summary: string[];
+    }>;
+  };
+}
+
 const parseXml = promisify(parseString);
 
 export async function searchArxiv(query: string, start: number = 0, maxResults: number = 10) {
@@ -14,7 +25,7 @@ export async function searchArxiv(query: string, start: number = 0, maxResults: 
     },
   });
   const xmlData = response.data;
-  const parsedResults = await parseXml(xmlData);
+  const parsedResults = await parseXml(xmlData) as ArxivResponse;
   
   // Extract and format the entries from the parsed XML
   const entries = parsedResults.feed.entry || [];
