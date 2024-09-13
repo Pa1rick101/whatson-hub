@@ -1,6 +1,7 @@
 import GridPattern from "@/components/magicui/animated-grid-pattern";
 import HyperText from "@/components/magicui/hyper-text";
 import ShineBorder from "@/components/magicui/shine-border";
+import ShimmerButton from "@/components/magicui/shimmer-button";
 import { Users, BookOpen, FolderTree } from "lucide-react";
 
 export default function Home() {
@@ -24,6 +25,12 @@ export default function Home() {
             </p>
             <p className="text-sm text-gray-500">- Balaji Srinivasan</p>
           </div>
+          <ShimmerButton
+            className="mt-6"
+            background="blue"
+          >
+            Start Research
+          </ShimmerButton>
         </div>
       </ShineBorder>
       
