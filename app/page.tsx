@@ -1,10 +1,19 @@
+"use client";
+
 import GridPattern from "@/components/magicui/animated-grid-pattern";
 import HyperText from "@/components/magicui/hyper-text";
 import ShineBorder from "@/components/magicui/shine-border";
 import ShimmerButton from "@/components/magicui/shimmer-button";
 import { Users, BookOpen, FolderTree } from "lucide-react";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleStartResearch = () => {
+    router.push('/selection');
+  };
+
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white text-gray-900">
       <GridPattern className="absolute inset-0 opacity-40 text-gray-300" />
@@ -28,6 +37,7 @@ export default function Home() {
           <ShimmerButton
             className="mt-6"
             background="blue"
+            onClick={handleStartResearch}
           >
             Start Research
           </ShimmerButton>
