@@ -11,7 +11,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleStartResearch = () => {
-    router.push('/selection');
+    router.push('/onboarding');
   };
 
   return (
