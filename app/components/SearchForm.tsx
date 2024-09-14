@@ -1,9 +1,13 @@
 import { useState } from 'react';
 
-export default function SearchForm({ onSearch }: { onSearch: (query: string) => void }) {
+interface SearchFormProps {
+  onSearch: (query: string) => void;
+}
+
+export default function SearchForm({ onSearch }: SearchFormProps) {
   const [query, setQuery] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(query);
   };

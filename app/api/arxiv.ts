@@ -13,26 +13,24 @@ interface ArxivResponse {
   };
 }
 
+interface Paper {
+  id: string;
+  title: string;
+  authors: string[];
+  summary: string;
+}
+
 const parseXml = promisify(parseString);
 
-export async function searchArxiv(query: string, start: number = 0, maxResults: number = 10) {
-  const baseUrl = 'http://export.arxiv.org/api/query';
-  const response = await axios.get(baseUrl, {
-    params: {
-      search_query: query,
-      start,
-      max_results: maxResults,
-    },
-  });
-  const xmlData = response.data;
-  const parsedResults = await parseXml(xmlData) as ArxivResponse;
-  
-  // Extract and format the entries from the parsed XML
-  const entries = parsedResults.feed.entry || [];
-  return entries.map((entry: any) => ({
+export async function fetchArxivPapers(category: string, paperCount: number): Promise<Paper[]> {
+  const url = `http://export.arxiv.org/api/query?search_query=cat:${category}&max_results=${paperCount}&sortBy=submittedDate&sortOrder=descending`;
+  const response = await axios.get(url);
+  const result = await parseXml(response.data) as ArxivResponse;
+
+  return result.feed.entry?.map(entry => ({
     id: entry.id[0],
     title: entry.title[0],
-    authors: entry.author.map((author: any) => author.name[0]),
+    authors: entry.author.map(a => a.name[0]),
     summary: entry.summary[0],
-  }));
+  })) || [];
 }
