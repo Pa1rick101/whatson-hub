@@ -23,14 +23,9 @@ interface Paper {
 const parseXml = promisify(parseString);
 
 export async function fetchArxivPapers(category: string, paperCount: number): Promise<Paper[]> {
-  const url = `http://export.arxiv.org/api/query?search_query=cat:${category}&max_results=${paperCount}&sortBy=submittedDate&sortOrder=descending`;
-  const response = await axios.get(url);
-  const result = await parseXml(response.data) as ArxivResponse;
-
-  return result.feed.entry?.map(entry => ({
-    id: entry.id[0],
-    title: entry.title[0],
-    authors: entry.author.map(a => a.name[0]),
-    summary: entry.summary[0],
-  })) || [];
+  const response = await fetch(`/api/fetchPapers?category=${category}&paperCount=${paperCount}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch papers');
+  }
+  return response.json();
 }

@@ -30,9 +30,17 @@ export default function SelectionPage() {
   const [searched, setSearched] = useState(false);
 
   const handleFetch = async () => {
-    const fetchedPapers = await fetchArxivPapers(category, paperCount);
-    setResults(fetchedPapers);
-    setSearched(true);
+    console.log('Fetching papers...');
+    try {
+      const fetchedPapers = await fetchArxivPapers(category, paperCount);
+      console.log('Fetched papers:', fetchedPapers);
+      setResults(fetchedPapers);
+      setSearched(true);
+    } catch (error) {
+      console.error('Error fetching papers:', error);
+      setResults([]);
+      setSearched(true);
+    }
   };
 
   return (
